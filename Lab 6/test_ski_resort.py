@@ -292,3 +292,4 @@ def test_empty_readings_inside_stream():
     assert check_chairlift_anemometer(
         [[], [20, 30]]
     ) == "SAFE_OPERATION"
+
