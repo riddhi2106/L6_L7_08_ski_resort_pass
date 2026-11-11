@@ -1,17 +1,39 @@
 from hypothesis import given, strategies as st
-from processor import parse_season_pass_validity, compute_trail_gradient, calculate_lift_access_tier
+from processor import (
+    parse_season_pass_validity,
+    compute_trail_gradient,
+    calculate_lift_access_tier
+)
 
-@given(st.text() | st.none())
+
+# Test 1: Date validation
+@given(st.one_of(st.text(), st.none()))
 def test_parse_season_pass_validity_no_crash(s):
-    #To-Do:Using try and except complete this function.
-    pass
+    try:
+        result = parse_season_pass_validity(s)
+        assert isinstance(result, str)
 
-@given(st.text() | st.none())
+    except ValueError:
+        pass
+
+
+# Test 2: Trail gradient calculation
+@given(st.one_of(st.text(), st.none()))
 def test_compute_trail_gradient_safe(s):
-    #To-Do:Using try and except complete this function.
-    pass
+    try:
+        result = compute_trail_gradient(s)
+        assert isinstance(result, (int, float))
 
-@given(st.text() | st.none())
+    except ValueError:
+        pass
+
+
+# Test 3: Lift access tier
+@given(st.one_of(st.text(), st.none()))
 def test_calculate_lift_access_tier_safe(s):
-    #To-Do:Using try and except complete this function.
-    pass
+    try:
+        result = calculate_lift_access_tier(s)
+        assert result in [35.0, 60.0, 85.0, 110.0]
+
+    except ValueError:
+        pass
